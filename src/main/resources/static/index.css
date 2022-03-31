@@ -1,0 +1,26 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+a{
+    font-size: 50px;
+    text-decoration: none;
+    margin: 15px;
+    border: 2px solid black;
+    color: black;
+    padding: 15px;
+
+}
+h1{
+    font-size: 60px;
+}
+a:hover{
+    background-color: black;
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+}

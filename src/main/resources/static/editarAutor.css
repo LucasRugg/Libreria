@@ -1,0 +1,14 @@
+body{
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+}
+input{
+    width: 3500px;
+}
+
+
+
