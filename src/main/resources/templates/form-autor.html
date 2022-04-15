@@ -46,7 +46,7 @@
       <td th:text="${autor.nombre}"></td>
       <td th:text="${autor.apellido}"></td>
       <td><a th:href="@{/autor/editarAutor/} + ${autor.id}" class="btn btn-warning">Editar</a></td>
-      <td><button class="btn btn-danger">X</button></td>
+      <td><a th:href="@{/autor/eliminarAutor/} + ${autor.id}" class="btn btn-danger">X</a></td>
     </tr>
    
 

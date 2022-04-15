@@ -13,16 +13,20 @@ and open the template in the editor.
         <link rel="stylesheet" href="../form-autor.css">
     </head>
     <body>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Nuevo nombre" autocomplete="off" name="nuevoNombre">
-          </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Apellido</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Nuevo apellido" autocomplete="off" name="nuevoApellido">
-          </div>
+        <form th:action="@{/autor/editarAutor}" method="POST">
+            <input type="hidden" th:value="${autor.id}" name="id"/>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Nuevo nombre" autocomplete="off" name="nombre" th:value="${autor.nombre}">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Nuevo apellido" autocomplete="off" name="apellido" th:value="${autor.apellido}">
+            </div>
 
-          <button type="submit" class="btn btn-primary">Enviar</button>
-        
+            <button type="submit" class="btn btn-primary">Enviar</button>
+
+        </form>
+
     </body>
 </html>

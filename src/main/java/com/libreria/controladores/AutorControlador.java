@@ -26,9 +26,9 @@ public class AutorControlador {
         List<Autor> autores = autorServicio.listar();
         List<Autor> autoresAlta = new ArrayList<Autor>();
         for (Autor autore : autores) {
-            if (autore.getAlta()==true) {
-                autoresAlta.add(autore);                
-            }            
+            if (autore.getAlta() == true) {
+                autoresAlta.add(autore);
+            }
         }
         modelo.put("autores", autoresAlta);
         return "form-autor.html";
@@ -37,7 +37,7 @@ public class AutorControlador {
     @PostMapping("/form")
     public String crearAutor(RedirectAttributes attr, @RequestParam String nombre, @RequestParam String apellido) {
         try {
-            
+
             autorServicio.crear(apellido, nombre);
             attr.addFlashAttribute("exito", "El autor " + nombre + " " + apellido + " fue cargado correctamente");
 
@@ -46,34 +46,35 @@ public class AutorControlador {
 
         return "redirect:/autor/form";
     }
-    
+
     @PostMapping("/editarAutor")
-    public String editar(RedirectAttributes attr, @RequestParam String id, @RequestParam String nombre, @RequestParam String apellido){
+    public String editar(RedirectAttributes attr, @RequestParam String id, @RequestParam String nombre, @RequestParam String apellido) {
         try {
-            
+
             autorServicio.editar(id, nombre, apellido);
             attr.addFlashAttribute("exito", "La modificacion se realizo correctamente");
         } catch (Exception e) {
         }
-        
-        return "/form.html";
-    
-    
-    }
-    
-   
-    
-    @GetMapping("/editarAutor/{id}")
-    public String editar(@PathVariable String id, ModelMap modelo) throws Exception{
-        
-        
-        return "redirect:/form";
-        
-    }
-    
-    
-    
-    
 
- 
+        return "redirect:/autor/form";
+
+    }
+
+    @GetMapping("/editarAutor/{id}")
+    public String editar(@PathVariable String id, ModelMap modelo) throws Exception {
+        Autor autor = autorServicio.buscarPorId(id);
+        modelo.put("autor", autor);
+
+        return "editarAutor.html";
+    }
+
+    @GetMapping("/eliminarAutor/{id}")
+    public String eliminar(@PathVariable String id, ModelMap modelo) throws Exception {
+        Autor autor = autorServicio.buscarPorId(id);
+        autorServicio.eliminar(autor);
+        modelo.put("autor", autor);
+
+        return "redirect:/autor/form";
+    }
+
 }

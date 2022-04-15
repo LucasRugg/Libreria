@@ -35,7 +35,6 @@ public class AutorService {
             return autor;
         } else {
             throw new Exception("No existe ese autor");
-
         }
     }
 
@@ -64,6 +63,13 @@ public class AutorService {
 
         return autor;
 
+    }
+    
+    @Transactional (rollbackFor = {Exception.class})
+    public Autor eliminar(Autor autor) throws Exception{
+        
+        autor.setAlta(false);
+        return autor;
     }
 
 }

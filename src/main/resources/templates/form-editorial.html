@@ -42,8 +42,8 @@
       <th scope="row" th:text="${editorial.id}"></th>
       <td th:text="${editorial.nombre}"></td>
      
-      <td><button class="btn btn-warning">Editar</button></td>
-      <td><button class="btn btn-danger">X</button></td>
+      <td><a th:href="@{/editorial/editar/} + ${editorial.id}" class="btn btn-warning">Editar</a></td>
+      <td><a th:href="@{/editorial/eliminar/} + ${editorial.id}" class="btn btn-danger">X</a></td>
     </tr>
    
 
