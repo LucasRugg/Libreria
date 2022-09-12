@@ -3,7 +3,6 @@ package com.libreria.services;
 import com.libreria.entidades.Cliente;
 import com.libreria.entidades.Libro;
 import com.libreria.entidades.Prestamo;
-import com.libreria.repositorios.ClienteRepositorio;
 import com.libreria.repositorios.PrestamoRepositorio;
 import java.util.Date;
 import java.util.List;
@@ -27,14 +26,19 @@ public class PrestamoService {
     @Transactional(rollbackFor = {Exception.class})
     public Prestamo crear(String idLibro, String idCliente) throws Exception {
         Prestamo prestamo = new Prestamo();
-        
+
         Cliente cliente = clienteService.buscarPorId(idCliente);
         prestamo.setCliente(cliente);
 
         Libro libro = libroService.buscarPorId(idLibro);
+
         prestamo.setLibro(libro);
-       
-        prestamo.setFechaPrestamo(new Date());
+        libro.setEjemplaresPrestados(libro.getEjemplaresPrestados() + 1);
+
+        Date hoy = new Date();
+        Date devolucion = new Date(hoy.getTime() + (86400000 * 10));
+        prestamo.setFechaPrestamo(hoy);
+        prestamo.setFechaDevolucion(devolucion);
 
         return prestamoRepositorio.save(prestamo);
 
@@ -60,4 +64,23 @@ public class PrestamoService {
 
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public Prestamo editar(String idPrestamo, String idCliente, String idLibro) throws Exception {
+        Libro libro = libroService.buscarPorId(idLibro);
+        Cliente cliente = clienteService.buscarPorId(idCliente);
+
+        Prestamo prestamo = buscarPorId(idPrestamo);
+        prestamo.setCliente(cliente);
+        prestamo.setLibro(libro);
+
+        prestamoRepositorio.save(prestamo);
+        return prestamo;
+
+    }
+
+    @Transactional(rollbackFor = {Exception.class})
+    public void eliminar(Prestamo prestamo) {
+
+        prestamoRepositorio.delete(prestamo);
+    }
 }

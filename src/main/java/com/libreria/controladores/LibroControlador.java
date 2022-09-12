@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -37,27 +40,19 @@ public class LibroControlador {
                 autoresAlta.add(autor);
             }
         }
-        
+
         List<Editorial> editoriales = editorialService.listar();
-        List<Editorial> editorialesAlta =  new ArrayList<Editorial>();
-        
+        List<Editorial> editorialesAlta = new ArrayList<Editorial>();
+
         for (Editorial editorial : editoriales) {
             if (editorial.getAlta()) {
                 editorialesAlta.add(editorial);
             }
         }
-        
-        
-        List<Libro> libros = libroService.listarTodos();
-        List<Libro> librosAlta = new ArrayList<Libro>();
 
-        for (Libro libro : libros) {
-            if (libro.getAlta()) {
-                librosAlta.add(libro);
-            }
-        }
-        
-        modelo.put("librosAlta", librosAlta);
+        List<Libro> libros = libroService.listarAltas();
+
+        modelo.put("librosAlta", libros);
         modelo.put("autoresAlta", autoresAlta);
         modelo.put("editorialesAlta", editorialesAlta);
         return "form-libro.html";
@@ -73,6 +68,51 @@ public class LibroControlador {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+
+        return "redirect:/libro/form";
+    }
+
+    @GetMapping("/editarlibro/{id}")
+    public String editar(@PathVariable String id, ModelMap modelo) throws Exception {
+        List<Autor> autores = autorService.listar();
+        List<Autor> autoresAlta = new ArrayList<Autor>();
+
+        for (Autor autor : autores) {
+            if (autor.getAlta()) {
+                autoresAlta.add(autor);
+            }
+        }
+        List<Editorial> editoriales = editorialService.listar();
+        List<Editorial> editorialesAlta = new ArrayList<Editorial>();
+
+        for (Editorial editorial : editoriales) {
+            if (editorial.getAlta()) {
+                editorialesAlta.add(editorial);
+            }
+        }
+        Libro libro = libroService.buscarPorId(id);
+        modelo.put("libro", libro);
+        modelo.put("autoresAlta", autoresAlta);
+        modelo.put("editorialesAlta", editorialesAlta);
+
+        return "editarLibro.html";
+    }
+
+    @PostMapping("/editarlibro")
+    public String editar(@RequestParam String id, @RequestParam String titulo, @RequestParam Long isbn, @RequestParam Integer anio, @RequestParam Integer ejemplares, @RequestParam Integer ejemplaresPrestados, @RequestParam String idAutor, @RequestParam String idEditorial) {
+        try {
+            libroService.editar(id, titulo, isbn, anio, ejemplares, ejemplaresPrestados, idAutor, idEditorial);
+        } catch (Exception e) {
+        }
+        return "redirect:/libro/form";
+
+    }
+
+    @GetMapping("/eliminarlibro/{id}")
+    public String eliminar(@PathVariable String id, ModelMap modelo) throws Exception {
+        Libro libro = libroService.buscarPorId(id);
+        libroService.darBaja(libro);
+        modelo.put("libro", libro);
 
         return "redirect:/libro/form";
     }

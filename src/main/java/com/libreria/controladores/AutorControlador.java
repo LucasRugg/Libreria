@@ -22,7 +22,7 @@ public class AutorControlador {
     AutorService autorServicio;
 
     @GetMapping("/form")
-    public String fotm(ModelMap modelo) {
+    public String form(ModelMap modelo) {
         List<Autor> autores = autorServicio.listar();
         List<Autor> autoresAlta = new ArrayList<Autor>();
         for (Autor autore : autores) {

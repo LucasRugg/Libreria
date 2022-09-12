@@ -39,7 +39,7 @@ public class EditorialControlador {
     public String crearEditorial(RedirectAttributes attr, @RequestParam String nombre) {
         try {
             editorialServicio.crear(nombre);
-            attr.addFlashAttribute("exito", "La editorial " + nombre + " fue cargado correctamente");
+            attr.addFlashAttribute("exito", "La editorial " + nombre + " fue cargada correctamente");
 
         } catch (Exception e) {
         }

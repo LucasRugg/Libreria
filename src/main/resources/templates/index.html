@@ -5,14 +5,21 @@
         <title>Gestor libreria</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../index.css">
+        <link rel="stylesheet" href="../header.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     </head>
     <body>
-        <h1>Bienvenido a la libreria</h1>
-        <a href="/autor/form">AUTORES</a>
-        <a href="/editorial/form">EDITORIALES</a>
-        <a href="/libro/form">LIBROS</a>
-        <a href="/cliente/form">CLIENTES</a>
-        <a href="/prestamo/form">PRESTAMOS</a>
+        <header th:replace="/fragmentHeader:: header"> </header>
+        <div class="texto">
+            <h3>Gestor de librerias</h3>
+
+            <p>Este es un proyecto realizado como parte del cursado de FullStack Developer de EGG Academy. </p>
+            <p>Fue realizado con Java y Spring para el backend y HTML , CSS y Bootstrap para el frontend. La base de datos utilizada es MySQL </p>
+            <p>El objetivo de esta web es poder realizar un CRUD que permita crear, listar, editar y eliminar objetos de cualquiera de las entidades disponibles.</p>
+            <p>En un futuro se agregaran mas funcionalidades</p>
+        </div>
+
+
+
     </body>
 </html>

@@ -52,9 +52,8 @@ public class ClienteService {
     public Cliente buscarPorId(String id) throws Exception {
         Optional<Cliente> respuesta = clienteRepositorio.findById(id);
 
-        if (respuesta.isPresent()) {
-            Cliente cliente = respuesta.get();
-            return cliente;
+        if (respuesta.isPresent()) {            
+            return respuesta.get();
         } else {
             throw new Exception("No existe ese cliente");
 

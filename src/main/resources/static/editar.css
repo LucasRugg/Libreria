@@ -1,26 +1,23 @@
 body{
-    margin: 5px;
+    height: 100vh;
+}
+.contenido{
+    margin: 45px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    font-size: 25px;
     align-items: center;
+    
 }
+
 form{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 150px;
-    padding:15px;
-    border: 2px solid black;
+   width: 350px;
+   text-align: center;
+   
 }
-input{
-    margin: 20px;
-    padding: 5px;
-}
-button{
+
+.buttonBack{
     padding: 10px;
+    border-radius: 5px;
     background-color: black;
-    color: white;
+ 
 }

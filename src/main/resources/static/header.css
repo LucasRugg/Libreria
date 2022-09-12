@@ -1,0 +1,46 @@
+header{
+    background-color: black;
+    height: 70px;    
+    display: flex;
+    justify-content: space-between
+}
+nav{
+    margin-right: 10px;
+    color: white;
+    display: flex;
+    justify-content:  flex-end;
+    align-items: center;
+}
+nav a {
+    margin-top: 15px;
+    padding:5px;
+    text-decoration: none;
+    
+}
+a:link{
+    text-decoration: none;
+    color:white;
+}
+a:visited{
+    color:white;
+}
+.logo{
+    width: 75px;
+    background-color: white;
+    border-radius: 50%;
+    margin-left: 10px;
+        
+    }
+    .texto{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 50%;
+        padding: 2%;
+        margin-left: 25%;
+        margin-top: 10%;
+        border: 2px solid black;
+        
+        
+    }
